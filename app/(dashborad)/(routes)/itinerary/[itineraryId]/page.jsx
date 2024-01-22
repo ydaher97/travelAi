@@ -10,6 +10,7 @@ import GoogleMap from './_component/GoogleMap';
 import axios from 'axios'
 import ActivityList from './_component/ActivityList';
 import { useRouter } from "next/navigation";
+import { SelectedActivityProvider } from '@/app/context/SelectedActivityContext';
 
 const ItineraryId = ({params}) => {
   const router = useRouter()
@@ -20,6 +21,7 @@ const [coords, setCoords] = useState({});
 
   const [places,setPlaces] = useState([])
   const [deletedIds, setDeletedIds] = useState([]);
+ 
 
   const handleDelete = async (itineraryId) => {
     try {
@@ -81,19 +83,15 @@ useEffect(() => {
 // }, [bounds]);
 
 
-
-  
-
-  
-
   // return redirect(`/itinerary/${itinerary.id}/activities/${itinerary.activities[0].id}`);
   
   return(
     <>
+    <SelectedActivityProvider>
     <div className="h-screen flex  flex-col md:flex-row">
       <div className="w-full overflow-y-auto  ">
         <TravelPlan className="w-full" itinerary={itineraryObj} onDelete={() => handleDelete(itineraryObj.id)}/>
-        <TravelActivites activities={itineraryObj.activities}/>
+        <TravelActivites activities={itineraryObj.activities} />
         <ActivityList places={places}/>
       </div>
       <div className="w-full ">
@@ -104,9 +102,11 @@ useEffect(() => {
         setBounds={setBounds}
         setCoords={setCoords}
         places={places}
-        activities={itineraryObj.activities}/>}
+        activities={itineraryObj.activities}
+        />}
       </div>
     </div>
+    </SelectedActivityProvider>
     </>
   )
 }

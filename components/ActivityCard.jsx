@@ -1,37 +1,35 @@
 import { getGooglePhotoUrl } from '@/lib/utils';
 import React from 'react';
+import { Star ,Calendar  } from 'lucide-react';
 
-const ActivityCard = ({ activity }) => {
+const ActivityCard = ({ activity , selectedActivity, onClick}) => {
+
   const {
     name,
-    // formatted_address,
-    // photoPath,
-    // rating,
-    // types,
+    price,
+    time,
+    description,
+    phone,
+    website,
+     photoUrl,
+    rating,
   } = activity;
 
   return (
-    <div className="max-w-md mx-auto my-5 bg-white rounded-xl overflow-hidden shadow-md md:max-w-2xl">
+    <div className="max-w-md mx-auto my-5 bg-white rounded-xl overflow-hidden shadow-md md:max-w-2xl" onClick={onClick}>
       <div className="md:flex">
-        {/* <img
+        <img
           className="h-48 w-full object-cover md:w-48"
-          src={getGooglePhotoUrl(photoPath)}  
+          src={photoUrl}  
           alt={name}
-        /> */}
-        <div className="p-8">
-          <h2 className="text-2xl font-bold">{name}</h2>
-          {/* <p className="text-gray-500">{formatted_address}</p>
-          <p className="text-yellow-500">{rating}</p>
+        />
+        <div className="p-4">
+          <h2 className="text-m font-bold">{name}</h2>
+          <p className="text-gray-500 flex my-1 items-end"><Calendar /> {time}</p>
+          <p className="text-yellow-500 flex my-1 items-end"><Star/> {rating}</p>
           <div className="mt-4 flex flex-wrap">
-            {types.map((type, index) => (
-              <span
-                key={index}
-                className="mr-2 mb-2 px-2 py-1 bg-gray-200 rounded-full text-gray-700 text-sm"
-              >
-                {type}
-              </span>
-            ))}
-          </div> */}
+            
+          </div>
         </div>
       </div>
     </div>

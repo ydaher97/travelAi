@@ -10,7 +10,7 @@ export async function GET(req,res) {
     const ne = urll.searchParams.get('ne');
     
     console.log(sw, ne);
-     const url = 'https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary'
+     const url = 'https://travel-advisor.p.rapidapi.com/attractions/list-in-boundary'
 
     const options = {
       params: {

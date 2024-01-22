@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import {
   Accordion,
@@ -6,8 +8,15 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import ActivityCard from './ActivityCard';
+import { useSelectedActivity } from '@/app/context/SelectedActivityContext';
 
 const Days = ({ date, activities }) => {
+  const { selectedActivity, setActivity } = useSelectedActivity();
+
+  const handleActivityClick = (activity) => {
+    console.log(activity)
+    setActivity(activity);
+  };
   return (
     <>
       <Accordion className='py-5 px-3 my-5' type='single' collapsible>
@@ -15,8 +24,12 @@ const Days = ({ date, activities }) => {
           <AccordionTrigger>{date}</AccordionTrigger>
           <AccordionContent>
             {activities.map((activity) => (
-              <ActivityCard activity={activity}/>
-            ))}
+            <ActivityCard
+            key={activity.id}  
+            activity={activity}
+            selectedActivity={selectedActivity}
+            onClick={() => handleActivityClick(activity)}
+            />            ))}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

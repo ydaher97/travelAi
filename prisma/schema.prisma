@@ -31,12 +31,15 @@ model Activity {
   id           String    @id @default(cuid()) @map("_id")
   name         String
   description  String?
-  lat          Float?
-  lng           Float?
-  open        Boolean?
+  latitude          Float?
+  longitude           Float?
   time        String? 
   price       Float?
-  date        DateTime
+  date        DateTime?
+  rating      String?
+  phone       Int?
+  website     String?
+  photoUrl     String?
 
   itinerary    Itinerary @relation(fields: [itineraryId], references: [id])
   itineraryId  String

@@ -1,43 +1,43 @@
-"use client"
-import { Loader } from '@googlemaps/js-api-loader';
-import React, { useEffect } from 'react';
+// "use client"
+// import { Loader } from '@googlemaps/js-api-loader';
+// import React, { useEffect } from 'react';
 
-const MapComponent = ({ latitude, longitude }) => {
-  const mapRef = React.useRef(null)
+// const MapComponent = ({ latitude, longitude }) => {
+//   const mapRef = React.useRef(null)
 
-  useEffect(() => {
+//   useEffect(() => {
 
-    const initMap = async ()=> {
+//     const initMap = async ()=> {
 
-      const loader = new Loader({
-        apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLACES,
-        version:'weekly'
-      });
+//       const loader = new Loader({
+//         apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLACES,
+//         version:'weekly'
+//       });
 
-      const {Map} = await loader.importLibrary('maps');
-      const position   = {
-        lat: latitude,
-        lng: longitude
-      }
+//       const {Map} = await loader.importLibrary('maps');
+//       const position   = {
+//         lat: latitude,
+//         lng: longitude
+//       }
     
 
-    const mapOptions = {
-      center: position,
-      zoom: 10,
-      mapId: 'MY_NEXTJS_MAPID'
-    }
+//     const mapOptions = {
+//       center: position,
+//       zoom: 10,
+//       mapId: 'MY_NEXTJS_MAPID'
+//     }
 
-    const map = new Map(mapRef.current, mapOptions)
-  }
+//     const map = new Map(mapRef.current, mapOptions)
+//   }
  
-    initMap() 
-  },[]);
+//     initMap() 
+//   },[]);
 
-  return(
-    <div style={{height:'700px'}} ref={mapRef} >
+//   return(
+//     <div style={{height:'700px'}} ref={mapRef} >
 
-    </div>
-  )
-};
+//     </div>
+//   )
+// };
 
-export default MapComponent;
+// export default MapComponent;

@@ -15,18 +15,11 @@ function fixJsonString(jsonString) {
 
 export async function POST(req, res) {
   try {
-    const { location, date, budget, duration, restaurants, attractions } = await req.json();
-    const selectedAttractions = attractions.slice(9).map(attraction => ({
-      geometry: attraction.geometry.location,
-      attraction_name: attraction.name,
-      rating: attraction.rating || null,  
-      opening_hours: attraction.opening_hours,
-      user_ratings_total: attraction.user_ratings_total || null  
-    }));
+    const { location, date, budget,numPeople, duration, selectedAttractions, selectedResturante } = await req.json();
+  
     
-    const selected = JSON.stringify(selectedAttractions)
-    console.log(selected)
-
+    const attractions = JSON.stringify(selectedAttractions)
+    const resturantes =  JSON.stringify(selectedResturante)
     const convo = [
       {
         role: "system",
@@ -73,7 +66,6 @@ export async function POST(req, res) {
       { role: "user", content: 'reply in JSON format' },
     ];
     
-    console.log(duration)
     const conversation = [
       {
         role: "system",
@@ -85,7 +77,7 @@ export async function POST(req, res) {
         role: "assistant",
         content: "Of course! Could you please povide me with more information?",
       },
-      { role: "user", content: `Based on my location in ${location} on ${date}, a duration of ${duration} days, suggest some attractions. Here are some attractions ${selected} I'm considering. Create a travle plan based on the user input.`},
+      { role: "user", content: `Based on my location in ${location} on the${date}, a duration of ${duration} days, i have a budget ${budget}$ fot this number of people ${numPeople} ,suggest some activities. Here are some attractions ${attractions} and resurantes ${resturantes} I'm considering. Create a travle plan based on the user input.`},
       { role: "assistant", content: `Great! so you are going to ${location} on the ${date} for ${duration}` },
       { role: "user", content: `yes make a plan for each day the first day start at the ${date} and up` },
       { role: "assistant", content: "Sounds good. so a plan for each day(date)" },
@@ -94,17 +86,10 @@ export async function POST(req, res) {
        "attractions": [
         {
           "name": "",
-          "location": {
-            "lat": 0.0,
-            "lng": 0.0
-            }
-          ,
-          "opening_hours": {
-            "open_now": true
-          },
-          "time": "morning or afternoon or night"
+          "locationId": ""
+          "price": put 0 if not price found
+          "time": "morning or afternoon or night",
           "date":"the date",
-          
         }, 
       ]` },
       {
@@ -136,7 +121,7 @@ export async function POST(req, res) {
     // for (let attempt = 1; attempt <= maxRetries; attempt++) {
       // Step 2: Interact with ChatGPT
       const completion = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo-1106",
         messages: conversation,
         max_tokens: 600,
         temperature:1

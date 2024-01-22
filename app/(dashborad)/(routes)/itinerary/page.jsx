@@ -10,6 +10,7 @@ import { Home } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import axios  from 'axios';
 import  Link  from "next/link";
+import Loading from "@/components/Loader"
 
 const itineraryPage = () => {
   const router = useRouter()
@@ -26,29 +27,47 @@ const itineraryPage = () => {
   const [attractions, setAttractions] = useState([]);
   const [photoPath, setPhotoPath] = useState('')
   const [restaurants, setRestaurants] = useState([]);
+  const [showLoader, setShowLoader] = useState(true);
+  const [finishedLoading, setFinishedLoading] = useState(false);
 
 
   useEffect( () => {
 
     const fetchAttractions = async() => {
       if(location){
-        const encodedLocation = encodeURIComponent(location);
+        // const encodedLocation = encodeURIComponent(location);
         try {
-          const attractionResponse = await axios.get(`/api/attractions?query=${encodedLocation}+Point+Of+Interest`);
-          const attractionsData = attractionResponse.data;
-            console.log("attrac" +attractionsData)
-          setAttractions(attractionsData);
+          // const attractionResponse = await axios.get(`/api/attractions?query=${encodedLocation}+Point+Of+Interest`);
+          // const attractionsData = attractionResponse.data;
+          //   console.log("attrac" +attractionsData)
 
-        // //   let term = 'restaurants'
-        // const response = await axios.get('/api/getPlacesData',{
-        //   params: {
-        //     sw: `${coordinates.lat},${coordinates.lng}`, 
-        //     ne: `${coordinates.lat},${coordinates.lng}`, 
-        //   },
-        // });;
-        // console.log("res" +response.data)
 
-        // setRestaurants(response.data)
+
+        //   let term = 'restaurants'
+        const margin = 0.1;
+        const swLat = coordinates.lat - margin;
+        const swLng = coordinates.lng - margin;
+        const neLat = coordinates.lat + margin;
+        const neLng = coordinates.lng + margin;
+
+        const placesResponse = await axios.get('/api/rapidAttractions', {
+          params: {
+            sw: `${swLat},${swLng}`,
+            ne: `${neLat},${neLng}`,
+          },
+        });
+        console.log(placesResponse.data)
+        setAttractions(placesResponse.data);
+
+        const resturanteResponse = await axios.get('/api/getPlacesData', {
+          params: {
+            sw: `${swLat},${swLng}`,
+            ne: `${neLat},${neLng}`,
+          },
+        });
+        console.log(resturanteResponse.data)
+
+        setRestaurants(resturanteResponse.data)
 
         // const businesses = yelpResponse.data.businesses;
         //  console.log('Yelp Businesses:', response.data);
@@ -63,11 +82,9 @@ const itineraryPage = () => {
   }, [location]);
 
   const handleShowMap = async () => {
+     setShowLoader(false)
     try {
       if (location) {
-      
-
-       
 
         const response = await axios.post("/api/itinerary", { 
           location,
@@ -81,8 +98,8 @@ const itineraryPage = () => {
           restaurants,
           attractions
            });
-
-
+            setShowLoader(false)
+            setFinishedLoading(true);
         router.push(`/itinerary/${response.data.id}`);
   
       }
@@ -93,27 +110,34 @@ const itineraryPage = () => {
   };
  
   return (
-    <div className="container mx-auto p-4 flex flex-col gap-4 md:items-center">
-      <Link href="/home"><Home className="text-2xl" /></Link>
-     
-      <SearchInput
-    setLocation={setLocation}
-    setCoordinates={setCoordinates}
-    setPhotoPath={setPhotoPath}
-  />
+    <>
+    {showLoader ? (
+      <div className="container mx-auto p-4 flex flex-col gap-4 md:items-center">
+        <Link href="/home">
+          <Home className="text-2xl" />
+        </Link>
 
-  <div >
-    <DateInput value={date} onChange={setDate} />
-    <DurationInput value={duration} onChange={setDuration} />
-    <BudgetInput value={budget} onChange={setBudget} />
-    <NumPeopleInput value={numPeople} onChange={setNumPeople} />
-  </div>
+        <SearchInput
+          setLocation={setLocation}
+          setCoordinates={setCoordinates}
+          setPhotoPath={setPhotoPath}
+        />
 
-  <Button type="primary" onClick={handleShowMap}>
-      Show Map
-    </Button>
+        <div>
+          <DateInput value={date} onChange={setDate} />
+          <DurationInput value={duration} onChange={setDuration} />
+          <BudgetInput value={budget} onChange={setBudget} />
+          <NumPeopleInput value={numPeople} onChange={setNumPeople} />
+        </div>
 
-    </div>
+        <Button type="primary" onClick={handleShowMap}>
+          Show Map
+        </Button>
+      </div>
+    ) : (
+      <Loading finished={finishedLoading} />
+    )}
+  </>
   )
 }
 
