@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model Itinerary {
+  id         String    @id @default(cuid()) @map("_id")
+  userId     String
+  location   String
+  latitude   Float
+  longitude  Float
+  date       DateTime
+  duration   Int
+  numPeople  Int
+  budget     Float
+  photoPath  String
+ 
+  activities Activity[]
+   createdAt DateTime @default(now()) @map("created_at")
+}
+
+model Activity {
+  id           String    @id @default(cuid()) @map("_id")
+  name         String
+  description  String?
+  lat          Float?
+  lng           Float?
+  open        Boolean?
+  time        String? 
+  price       Float?
+  date        DateTime
+
+  itinerary    Itinerary @relation(fields: [itineraryId], references: [id])
+  itineraryId  String
+}
+
