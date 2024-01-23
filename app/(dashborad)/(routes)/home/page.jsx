@@ -14,7 +14,6 @@ const Home = async() => {
         id: "desc"
       },
    });
-   console.log(itinerary.length)
     return(
       <div className="m-6">
       {itinerary.length === 0 ? (
