@@ -4,9 +4,9 @@ import Image from "next/image";
 
 
 const loadingTexts = [
-  "Generating questions...",
-  "Unleashing the power of curiosity...",
-  "Diving deep into the ocean of questions..",
+  "Generating Attraction...",
+  "Unleashing the power of Ai...",
+  "Diving deep into the ocean ..",
   "Harnessing the collective knowledge of the cosmos...",
   "Igniting the flame of wonder and exploration...",
 ];

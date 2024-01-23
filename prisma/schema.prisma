@@ -34,13 +34,15 @@ model Activity {
   latitude          Float?
   longitude           Float?
   time        String? 
-  price       Float?
+  price       String?
   date        DateTime?
   rating      String?
-  phone       Int?
+  phone       String?
   website     String?
   photoUrl     String?
-
+  webUrl        String?
+  address       String?
+  
   itinerary    Itinerary @relation(fields: [itineraryId], references: [id])
   itineraryId  String
 }

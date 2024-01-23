@@ -5,9 +5,28 @@ import Days from './Days'
 
 
 const calculateTotalPrice = (activitiesForDate) => {
-  const activitiesWithPrice = activitiesForDate.filter((activity) => typeof activity.price === 'number');
+  const activitiesWithPrice = activitiesForDate.filter((activity) => typeof activity.price === 'string');
 
-  const totalPrice = activitiesWithPrice.reduce((total, activity) => total + activity.price, 0);
+  const totalPrice = activitiesWithPrice.reduce((total, activity) => {
+    const priceRange = activity.price.replace(/\$/g, ''); // Remove dollar signs
+    const prices = priceRange.split('-').map((price) => parseInt(price.trim(), 10));
+
+    console.log('Parsed Prices:', prices);
+
+    if (prices.some(isNaN)) {
+      console.error('Invalid price format for activity:', activity);
+      return total; // Skip invalid prices
+    }
+
+    const averagePrice = prices.reduce((sum, value) => sum + value, 0) / prices.length;
+
+    if (isNaN(averagePrice)) {
+      console.error('Average price is NaN for activity:', activity);
+      return total; // Skip if average is NaN
+    }
+
+    return total + averagePrice;
+  }, 0);
 
   return totalPrice;
 };

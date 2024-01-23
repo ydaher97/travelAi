@@ -2,9 +2,12 @@
 import React, { useEffect,useState } from 'react';
 import { MapPin } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { useSelectedActivity } from '@/context/SelectedActivityContext';
+import Image from 'next/image'
 
-const CustomMarker = ({ text }) => {
+const CustomMarker = ({ text,src }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const { selectedActivity } = useSelectedActivity();
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,18 +29,18 @@ const CustomMarker = ({ text }) => {
         <div className="w-full">
           <div className="flex flex-col items-start mb-4">
             <h2 className="text-s font-semibold text-gray-900">{text}</h2>
-            {/* <p className="text-sm text-gray-500">{placeData.formatted_address}</p>
-            <div className="flex items-center space-x-2">
+            {/* <p className="text-sm text-gray-500">{placeData.formatted_address}</p> */}
+            <div >
               <Image
-                src={placeData.icon}
-                alt={placeData.name}
-                width={24}
-                height={24}
-                className="w-6 h-6 rounded-full"
+                src={src}
+                alt={'sdas'}
+                width={200}
+                height={200}
+                className="w-20 h-14 "
               />
-              <span className="text-sm font-medium text-gray-700">{placeData.rating} stars</span>
+              {/* <span className="text-sm font-medium text-gray-700">{placeData.rating} stars</span> */}
             </div>
-            <p className="text-sm text-gray-500 mb-2">Opening Hours: {placeData.opening_hours.open_now ? 'Open Now' : 'Closed'}</p>
+            {/* <p className="text-sm text-gray-500 mb-2">Opening Hours: {placeData.opening_hours.open_now ? 'Open Now' : 'Closed'}</p>
             <p className="text-sm text-gray-500">{placeData.user_ratings_total} reviews</p> */}
           </div>
         

@@ -1,74 +1,35 @@
-import React from 'react'
-import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarTrigger,
-  } from "@/components/ui/menubar"
-  
-  import { Link } from '@radix-ui/react-navigation-menu'
-  
- const TripNavbar = () => {
-  return (
-    <Menubar >
-    <MenubarMenu >
-      <MenubarTrigger className='px-12'>File</MenubarTrigger>
-      <MenubarContent>
-        <MenubarItem>
-          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-        </MenubarItem>
-        <MenubarItem>New Window</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Share</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Print</MenubarItem>
-      </MenubarContent> 
-    </MenubarMenu>
-    <MenubarMenu >
-      <MenubarTrigger className='px-11'>File</MenubarTrigger>
-      <MenubarContent>
-        <MenubarItem>
-          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-        </MenubarItem>
-        <MenubarItem>New Window</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Share</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Print</MenubarItem>
-      </MenubarContent> 
-    </MenubarMenu>
-    <MenubarMenu>
-      <MenubarTrigger className='px-12'>File</MenubarTrigger>
-      <MenubarContent>
-        <MenubarItem>
-          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-        </MenubarItem>
-        <MenubarItem>New Window</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Share</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Print</MenubarItem>
-      </MenubarContent> 
-    </MenubarMenu>
-    <MenubarMenu>
-      <MenubarTrigger className='px-12'>File</MenubarTrigger>
-      <MenubarContent>
-        <MenubarItem>
-          New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-        </MenubarItem>
-        <MenubarItem>New Window</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Share</MenubarItem>
-        <MenubarSeparator />
-        <MenubarItem>Print</MenubarItem>
-      </MenubarContent> 
-    </MenubarMenu>
-  </Menubar>
-  
-  )
-}
+import React, { useState } from 'react';
+import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
+import { Link } from '@radix-ui/react-navigation-menu';
 
-export default TripNavbar
+const TripNavbar = ({ onMenuSelect }) => {
+  const [selectedMenu, setSelectedMenu] = useState(null);
+
+  const handleMenuSelect = (menu) => {
+    console.log(menu)
+    setSelectedMenu(menu);
+    onMenuSelect && onMenuSelect(menu);
+  };
+
+  return (
+    <Menubar className="flex justify-around">
+      <MenubarMenu>
+        <MenubarTrigger onClick={() => handleMenuSelect('plan')}>
+          Plan
+        </MenubarTrigger>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger onClick={() => handleMenuSelect('edit')}>
+          Edit
+        </MenubarTrigger>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger onClick={() => handleMenuSelect('view')}>
+          View
+        </MenubarTrigger>
+      </MenubarMenu>
+    </Menubar>
+  );
+};
+
+export default TripNavbar;

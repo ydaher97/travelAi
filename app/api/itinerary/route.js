@@ -59,73 +59,73 @@ export async function POST(req) {
       });
 
      
-    //   const attractionResponse = await axios.post('http://localhost:3000/api/suggestions', {
-    //     location, 
-    //     date,
-    //     budget, 
-    //     duration,
-    //     numPeople,
-    //     selectedAttractions, 
-    //     selectedResturante
-    // }, {
-    //     headers: {
-    //         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-    //         'Content-Type': 'application/json'
-    //     }
-    // });
+      const attractionResponse = await axios.post('http://localhost:3000/api/suggestions', {
+        location, 
+        date,
+        budget, 
+        duration,
+        numPeople,
+        selectedAttractions, 
+        selectedResturante
+    }, {
+        headers: {
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+            'Content-Type': 'application/json'
+        }
+    });
 
-    //  console.log("parsed" +attractionResponse.data)
-    //  let activities;
+     console.log("parsed" +attractionResponse.data)
+     let activities;
 
-    //  if (Array.isArray(attractionResponse.data)) {
-    //      activities = attractionResponse.data;
-    //  } else {
-    //      const [jsonObjects, remainingString] = handleAttractionResponse(attractionResponse.data);
-    //      console.log("obj", jsonObjects);
-    //      const parsedJsonObject = await JSON.parse(jsonObjects)
-    //     console.log({parsedJsonObject})
-    //      // Handle jsonObjects as needed
-    //      activities = parsedJsonObject?.attractions || parsedJsonObject || [];
-    //      console.log("string", remainingString);
-    //      console.log({activities})
-    //  }
-    const activities = [
-        {
-            name: 'Rijksmuseum',
-            locationId: '189379',
-            price: 0,
-            time: 'morning',
-            date: '2024-01-24'
-          },
-          {
-            name: 'Van Gogh Museum',
-            locationId: '190554',
-            price: 0,
-            time: 'morning',
-            date: '2024-01-24'
-          },
-          {
-            name: 'Museum Het Rembrandthuis',
-            locationId: '198999',
-            price: 0,
-            time: 'afternoon',
-            date: '2024-01-24'
-          },
-          {
-            name: 'Moco Museum Amsterdam',
-            locationId: '10355655',
-            price: 0,
-            time: 'afternoon',
-            date: '2024-01-24'
-          },
-          {
-            name: "Graham's Kitchen",
-            locationId: '10218656',
-            price: '$41 - $75',
-            time: 'night',
-            date: '2024-01-24'
-          }
-    ]
+     if (Array.isArray(attractionResponse.data)) {
+         activities = attractionResponse.data;
+     } else {
+         const [jsonObjects, remainingString] = handleAttractionResponse(attractionResponse.data);
+         console.log("obj", jsonObjects);
+         const parsedJsonObject = await JSON.parse(jsonObjects)
+        console.log({parsedJsonObject})
+         // Handle jsonObjects as needed
+         activities = parsedJsonObject?.attractions || parsedJsonObject || [];
+         console.log("string", remainingString);
+         console.log({activities})
+     }
+    // const activities = [
+    //     {
+    //         name: 'Rijksmuseum',
+    //         locationId: '189379',
+    //         price: 0,
+    //         time: 'morning',
+    //         date: '2024-01-24'
+    //       },
+    //       {
+    //         name: 'Van Gogh Museum',
+    //         locationId: '190554',
+    //         price: 0,
+    //         time: 'morning',
+    //         date: '2024-01-24'
+    //       },
+    //       {
+    //         name: 'Museum Het Rembrandthuis',
+    //         locationId: '198999',
+    //         price: 0,
+    //         time: 'afternoon',
+    //         date: '2024-01-24'
+    //       },
+    //       {
+    //         name: 'Moco Museum Amsterdam',
+    //         locationId: '10355655',
+    //         price: 0,
+    //         time: 'afternoon',
+    //         date: '2024-01-24'
+    //       },
+    //       {
+    //         name: "Graham's Kitchen",
+    //         locationId: '10218656',
+    //         price: '$41 - $75',
+    //         time: 'night',
+    //         date: '2024-01-24'
+    //       }
+    // ]
      
      const findAttractionById = (attractions, locationId) => {
         return attractions.find(attraction => attraction.location_id === locationId);
@@ -180,9 +180,11 @@ export async function POST(req) {
                  latitude: Number(activity.latitude),
                  longitude: Number(activity.longitude),
                  photoUrl: activity.photo.images.medium.url || activity.photo.images.small.url,
-                 phone: Number(activity.phone),
+                 phone: activity.phone,
                  website:activity.website,
                  rating:activity.rating,
+                 webUrl:activity.web_url,
+                 address: activity.address
              }
          });
          console.log(createActivity);

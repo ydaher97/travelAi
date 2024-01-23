@@ -20,51 +20,7 @@ export async function POST(req, res) {
     
     const attractions = JSON.stringify(selectedAttractions)
     const resturantes =  JSON.stringify(selectedResturante)
-    const convo = [
-      {
-        role: "system",
-        content: `Based on my location in ${location} on ${date}, with a budget of ${budget} and a duration of ${duration} days, suggest some attractions. Here are some attractions ${selectedAttractions} I'm considering. Create a fill all the fields and make the plane based on the user input detailed plan with the following structure in JSON format:
-    make the plans with date and duration in the duration ${duration} days so you make as many as the duration so you add 1 to the day of the date each time and finish the answers till it finish dont cut
-    {
-      "plan": {
-        "put this date ${date}": {
-          "attractions": [
-            {
-              "name": "Attraction name",
-              "geometry": {
-                "location": {
-                  "lat": 0.0,
-                  "lng": 0.0
-                }
-              },
-              "opening_hours": {
-                "open_now": true
-              },
-            },
-            {
-              "name": "Attraction 2",
-              "geometry": {
-                "location": {
-                  "lat": 0.0,
-                  "lng": 0.0
-                }
-              },
-              "opening_hours": {
-                "open_now": true
-              },
-            }
-          ],
-          "times": {
-            "Attraction 1": "Morning",
-            "Attraction 2": "Afternoon"
-          },
-          "total_cost": 0
-        }
-      }
-    }`,
-      },
-      { role: "user", content: 'reply in JSON format' },
-    ];
+    console.log(resturantes)
     
     const conversation = [
       {
@@ -82,12 +38,12 @@ export async function POST(req, res) {
       { role: "user", content: `yes make a plan for each day the first day start at the ${date} and up` },
       { role: "assistant", content: "Sounds good. so a plan for each day(date)" },
       { role: "user",
-       content: `yes, make the plan in this structure based on the attraction that i provided fill all the fields not placeholders but the attraction_name i provided 
+       content: `yes, make the plan in this structure based on the attraction and resurantes that i provided fill all the fields not placeholders but the attraction_name/resturante_name i provided 
        "attractions": [
         {
           "name": "",
           "locationId": ""
-          "price": put 0 if not price found
+          "price": put "" empty string if no price
           "time": "morning or afternoon or night",
           "date":"the date",
         }, 

@@ -74,3 +74,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+.custom-scroll {
+  scrollbar-width: thin;  /* For Firefox */
+  scrollbar-color: darkgray lightgray;  /* For Firefox */
+
+  &::-webkit-scrollbar {
+    width: 12px;  /* Width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: lightgray;  /* Color of the track */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgray;  /* Color of the thumb */
+    border-radius: 6px;  /* Rounded corners of the thumb */
+    border: 3px solid lightgray;  /* Border color between thumb and track */
+  }
+}

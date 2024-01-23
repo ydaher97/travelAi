@@ -1,13 +1,10 @@
 
-import  Link  from "next/link";
 
 import Itineraries from "@/components/Itineraries";
 import  db  from "@/lib/prismadb";
-import { Plus  } from "lucide-react"
- 
-import { Button } from "@/components/ui/button"
- import { auth } from "@clerk/nextjs";
+import Image from 'next/image'
 
+ import { auth } from "@clerk/nextjs";
 const Home = async() => {
     const { userId } = auth();
     const itinerary = await db.itinerary.findMany({
@@ -19,13 +16,19 @@ const Home = async() => {
    });
    console.log(itinerary.length)
     return(
-        <div className='m-6'>
-            <Link href='/itinerary'><Button className="rounded-full"><Plus/> Add Trip</Button></Link>
-            <div >
-            <Itineraries itinerary={itinerary}/>
-
-            </div>
+      <div className="m-6">
+      {itinerary.length === 0 ? (
+        <div className="flex justify-center items-center flex-col h-screen" >
+          <h2 className="text-2xl">no trips found</h2>
+          <Image src="/pana.svg" width={300}
+           height={200} alt="Empty Itinerary" />
         </div>
+      ) : (
+        <div>
+          <Itineraries itinerary={itinerary} />
+        </div>
+      )}
+    </div>
     )
 }
 

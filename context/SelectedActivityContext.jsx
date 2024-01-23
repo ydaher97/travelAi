@@ -6,6 +6,7 @@ export const SelectedActivityProvider = ({ children }) => {
   const [selectedActivity, setSelectedActivity] = useState(null);
 
   const setActivity = (activity) => {
+    console.log(activity)
     setSelectedActivity(activity);
   };
 

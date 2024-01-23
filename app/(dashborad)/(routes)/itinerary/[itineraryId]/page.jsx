@@ -1,16 +1,14 @@
 "use client"
 
 import React, {useEffect, useState} from 'react'
-import  db  from "@/lib/prismadb";
 import { redirect } from "next/navigation";
-import MapComponent from './_component/Map'
 import TravelPlan from './_component/TravelPlan'
 import TravelActivites from './_component/TravelActivites';
 import GoogleMap from './_component/GoogleMap';
 import axios from 'axios'
-import ActivityList from './_component/ActivityList';
+// import ActivityList from './_component/ActivityList';
 import { useRouter } from "next/navigation";
-import { SelectedActivityProvider } from '@/app/context/SelectedActivityContext';
+import { SelectedActivityProvider } from '@/context/SelectedActivityContext';
 
 const ItineraryId = ({params}) => {
   const router = useRouter()
@@ -61,26 +59,26 @@ useEffect(() => {
 }, [params.itineraryId]);
 
 
-// useEffect(() => {
-//   const getPlaces = async () => {
-//     try {
-//       if (bounds) {
-//         const response = await axios.get('/api/getPlacesData', {
-//           params: {
-//             sw: `${bounds.sw.lat},${bounds.sw.lng}`, 
-//             ne: `${bounds.ne.lat},${bounds.ne.lng}`, 
-//           },
-//         });
-//         console.log(response.data)
-//         setPlaces(response.data);
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
+useEffect(() => {
+  const getPlaces = async () => {
+    try {
+      if (bounds) {
+        const response = await axios.get('/api/getPlacesData', {
+          params: {
+            sw: `${bounds.sw.lat},${bounds.sw.lng}`, 
+            ne: `${bounds.ne.lat},${bounds.ne.lng}`, 
+          },
+        });
+        console.log(response.data)
+        setPlaces(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-//   getPlaces();
-// }, [bounds]);
+  getPlaces();
+}, [bounds]);
 
 
   // return redirect(`/itinerary/${itinerary.id}/activities/${itinerary.activities[0].id}`);
@@ -89,13 +87,12 @@ useEffect(() => {
     <>
     <SelectedActivityProvider>
     <div className="h-screen flex  flex-col md:flex-row">
-      <div className="w-full overflow-y-auto  ">
+      <div className="w-full overflow-y-auto  custom-scroll">
         <TravelPlan className="w-full" itinerary={itineraryObj} onDelete={() => handleDelete(itineraryObj.id)}/>
-        <TravelActivites activities={itineraryObj.activities} />
-        <ActivityList places={places}/>
+        <TravelActivites activities={itineraryObj.activities} places={places}/>
+        {/* <ActivityList places={places}/> */}
       </div>
       <div className="w-full ">
-      {/* <MapComponent latitude={itinerary.latitude} longitude={itinerary.longitude} /> */}
       {places && <GoogleMap 
         latitude={itineraryObj.latitude}
         longitude={itineraryObj.longitude}

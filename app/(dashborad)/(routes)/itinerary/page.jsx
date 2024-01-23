@@ -112,10 +112,17 @@ const ItineraryPage = () => {
   return (
     <>
     {showLoader ? (
-      <div className="container mx-auto p-4 flex flex-col gap-4 md:items-center">
+      <div className="w-1/2 container mx-auto p-6 border-2 flex flex-col gap-4 ">
+        <div className='self-start flex '>
         <Link href="/home">
-          <Home className="text-2xl" />
-        </Link>
+        <div className='flex'>
+        <Home className="text-2xl mx-2" />
+        Home
+        </div>
+
+      </Link>
+        </div>
+       
 
         <SearchInput
           setLocation={setLocation}
@@ -131,7 +138,7 @@ const ItineraryPage = () => {
         </div>
 
         <Button type="primary" onClick={handleShowMap}>
-          Show Map
+          Create Itinerary 
         </Button>
       </div>
     ) : (

@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import ActivityCard from './ActivityCard';
-import { useSelectedActivity } from '@/app/context/SelectedActivityContext';
+import { useSelectedActivity } from '@/context/SelectedActivityContext';
 
 const Days = ({ date, activities }) => {
   const { selectedActivity, setActivity } = useSelectedActivity();
@@ -23,7 +23,7 @@ const Days = ({ date, activities }) => {
         <AccordionItem value={date}>
           <AccordionTrigger>{date}</AccordionTrigger>
           <AccordionContent>
-            {activities.map((activity) => (
+            {activities.map((activity,index) => (
             <ActivityCard
             key={activity.id}  
             activity={activity}

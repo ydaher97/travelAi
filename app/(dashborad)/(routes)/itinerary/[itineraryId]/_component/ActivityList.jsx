@@ -13,20 +13,19 @@ const ActivityList = ({places}) => {
   return (
     <Carousel
       opts={{
-        align: "start",
+        align: "center",
       }}
-      className="w-full"
+      className="w-3/4 ml-16"
     >
-      <CarouselContent>
+      <CarouselContent className="p-10 h-60">
         {places.map((place, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 ">
             <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-3xl font-semibold">{   
+              <Card className="">
+                <CardContent className="flex aspect-square items-center justify-center p-2 w-full h-fit">
+                  {   
                   <PlaceDetails  place={place} />
-
-                }</span>
+                }
                 </CardContent>
               </Card>
             </div>
@@ -36,9 +35,6 @@ const ActivityList = ({places}) => {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-    // <div> {places?.map((place, i) => (
-    //       <PlaceDetails  key={i}   place={place} />
-    //   ))}</div>
   )
 }
 

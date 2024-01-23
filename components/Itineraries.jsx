@@ -1,32 +1,21 @@
-'use client'
-import React, { useState, useEffect } from 'react';
 import ItineraryCard from './ItineraryCard';
-import axios from 'axios';
+import { PlaneTakeoff } from 'lucide-react';
 
 const Itineraries = ({ itinerary }) => {
-  const [deletedIds, setDeletedIds] = useState([]);
-
-  const handleDelete = async (itineraryId) => {
-    try {
-      await axios.delete('api/itinerary/deleteItinerary', { data: { itineraryId } });
-      setDeletedIds((prevIds) => [...prevIds, itineraryId]);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
-
-  useEffect(() => {
-    console.log('Itinerary deleted!', deletedIds);
-  }, [deletedIds]);
 
   return (
-    <div className="flex justify-around flex-wrap -mx-4">
+    <>
+    <div>
+      <h2 className="text-gray-500 my-3 text-2xl font-bold">  <PlaneTakeoff className='text-2xl mx-2'/> My trips</h2>
+    </div>
+    <div className="flex  flex-wrap -mx-4">
       {itinerary.map((itinerary) => (
-        !deletedIds.includes(itinerary.id) && (
-          <ItineraryCard key={itinerary.id} itinerary={itinerary} onDelete={() => handleDelete(itinerary.id)} />
-        )
+         
+          <ItineraryCard key={itinerary.id} itinerary={itinerary} />
+        
       ))}
     </div>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+'use client'
 
 import {getGooglePhotoUrl,formatDate} from "@/lib/utils"
 import {
@@ -13,13 +14,11 @@ import {
 
   import { useRouter } from 'next/navigation'
 
-  const ItineraryCard = ({ itinerary , onDelete }) => {
+  const ItineraryCard = ({ itinerary  }) => {
   const router = useRouter()
     const { id, location, date, duration, numPeople, photoPath} = itinerary;
 
-    const handleDelete =  () => {
-         onDelete();
-      };
+ 
 
       const handleClick  = () => {
         router.push(`/itinerary/${id}`)
@@ -36,7 +35,7 @@ import {
           </p>
           <p className="text-sm text-gray-500">{`${formatDate(date)} - ${duration} days`}</p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-0 ">
         <div className="w-full h-40 overflow-hidden"> 
           <Image
             src={getGooglePhotoUrl(photoPath)}
@@ -46,20 +45,11 @@ import {
            height={150}
           />
         </div>
-          {/* <ul className="list-none space-y-2">
-            {activities.map((activity) => (
-              <li key={activity.id}>
-                <Icon name="check" className="mr-2" />
-                {activity.name}
-              </li>
-            ))}
-          </ul> */}
         </CardContent>
-        <CardFooter>
+        <CardFooter >
         <UserRound /><p className="text-sm text-gray-500">
           {numPeople}
           </p>
-          {/* <button onClick={handleDelete}>Delete</button> */}
         </CardFooter>
       </Card>
     );

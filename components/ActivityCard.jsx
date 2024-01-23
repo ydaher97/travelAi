@@ -16,8 +16,13 @@ const ActivityCard = ({ activity , selectedActivity, onClick}) => {
     rating,
   } = activity;
 
+  const handleActivityClick = ()=> {
+    console.log("ActivityCard")
+    onClick()
+  }
+
   return (
-    <div className="max-w-md mx-auto my-5 bg-white rounded-xl overflow-hidden shadow-md md:max-w-2xl" onClick={onClick}>
+    <div className="max-w-md mx-auto my-5 bg-white rounded-xl overflow-hidden shadow-md md:max-w-2xl" onClick={handleActivityClick}>
       <div className="md:flex">
         <Image
           className="h-48 w-full object-cover md:w-48"

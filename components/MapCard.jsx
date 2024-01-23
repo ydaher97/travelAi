@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 
-const placeData = {
-  // Your place data here
-};
+
 
 const PhotoCard = ({ placeData }) => {
   return (
@@ -22,12 +20,12 @@ const PhotoCard = ({ placeData }) => {
             />
             <span className="text-sm font-medium text-gray-700">{placeData.rating} stars</span>
           </div>
-          {/* Additional fields */}
+    
           <p className="text-sm text-gray-500 mb-2">Opening Hours: {placeData.opening_hours.open_now ? 'Open Now' : 'Closed'}</p>
           <p className="text-sm text-gray-500">{placeData.user_ratings_total} reviews</p>
         </div>
         <Image
-          src={placeData.photos[0].getUrl()} // Assuming photos is an array of Photo objects
+          src={placeData.photos[0].getUrl()} 
           alt={placeData.name}
           layout="fill"
           className="w-64 h-64 object-cover rounded-lg"

@@ -8,18 +8,24 @@ export async function DELETE(req) {
       //const {userId} = auth()
 
     const { itineraryId } = await req.json();
-    console.log(itineraryId)
-      await db.itinerary.delete({
+    await db.activity.deleteMany({
+      where: {
+        itineraryId: itineraryId 
+       },
+    })
+    console.log('activity deleted')
+      await db.Itinerary.delete({
             where: {
              id: itineraryId 
             },
         })
+        
 
 
   
       return NextResponse.json('Itinerary deleted successfuly');
   } catch (error) {
-      console.log("[itinerary]", error);
+      console.log("[delete itinerary]", error);
       return new NextResponse("Internal Error", { status: 500 });
   }
 }
