@@ -13,12 +13,12 @@ import {
   } from "@/components/ui/card"
   import { Button } from './ui/button';
 
-const SelectedActivityCard = ({ selectedActivity }) => {
-  if (!selectedActivity) {
-    return null;
-  }
-  const { setActivity } = useSelectedActivity();
+const SelectedActivityCard = () => {
 
+  const {selectedActivity, setActivity } = useSelectedActivity();
+  if (!selectedActivity) {
+    return null; 
+  }
   const {
     name,
     time,

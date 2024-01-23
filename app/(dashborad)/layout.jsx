@@ -5,7 +5,7 @@ import Sidebar from "./(routes)/_components/Sidebar";
 import { usePathname } from 'next/navigation'
 
 
-const DashboardLayout = async ({
+const DashboardLayout =  ({
     children
 }) => {
     const path = usePathname()

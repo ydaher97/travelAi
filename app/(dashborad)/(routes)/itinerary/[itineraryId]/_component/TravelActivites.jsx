@@ -15,7 +15,7 @@ const TravelActivites = ({activities ,places}) => {
         <TripNavbar onMenuSelect={handleMenuSelect}/>
         {selectedMenu === 'plan' && <Activities activities={activities} />}
       {selectedMenu === 'edit' &&   <ActivityList places={places}/>}
-      {selectedMenu === 'view' && <OtherComponent2 />}
+      {/* {selectedMenu === 'view' && <OtherComponent2 />} */}
     </div>
   )
 }
