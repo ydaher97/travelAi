@@ -12,7 +12,7 @@ import axios  from 'axios';
 import  Link  from "next/link";
 import Loading from "@/components/Loader"
 
-const itineraryPage = () => {
+const ItineraryPage = () => {
   const router = useRouter()
   const [location, setLocation] = useState(null);
   const [coordinates, setCoordinates] = useState({
@@ -79,7 +79,7 @@ const itineraryPage = () => {
     }
     fetchAttractions()
    
-  }, [location]);
+  }, [location,coordinates.lat,coordinates.lng]);
 
   const handleShowMap = async () => {
      setShowLoader(false)
@@ -141,4 +141,4 @@ const itineraryPage = () => {
   )
 }
 
-export default itineraryPage
+export default ItineraryPage

@@ -1,18 +1,13 @@
 import React from 'react';
 import  Link  from "next/link";
 import { getGooglePhotoUrl,formatDate } from '@/lib/utils';
-
+import Image from 'next/image'
 const TravelPlan = ({ itinerary, onDelete }) => {
   const { location, date, duration, photoPath } = itinerary;
 
   const handleDelete =  () => {
     onDelete();
  };
-
-  // const getGooglePhotoUrl = (photoReference) => {
-  //   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLACES;
-  //   return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=${photoReference}&key=${apiKey}`;
-  // };
 
   return (
     <div className="relative">
@@ -22,10 +17,12 @@ const TravelPlan = ({ itinerary, onDelete }) => {
       </div>
        
 
-    <img
+    <Image
       src={getGooglePhotoUrl(photoPath)}
       alt="Itinerary Photo"
       className="w-full h-[370px] object-cover"
+      width={200}
+           height={150}
     />
 
     <div

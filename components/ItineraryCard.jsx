@@ -9,8 +9,10 @@ import {
     CardTitle,
   } from "@/components/ui/card"
   import { UserRound } from 'lucide-react';
+  import Image from 'next/image'
 
   import { useRouter } from 'next/navigation'
+
   const ItineraryCard = ({ itinerary , onDelete }) => {
   const router = useRouter()
     const { id, location, date, duration, numPeople, photoPath} = itinerary;
@@ -36,10 +38,12 @@ import {
         </CardHeader>
         <CardContent>
         <div className="w-full h-40 overflow-hidden"> 
-          <img
+          <Image
             src={getGooglePhotoUrl(photoPath)}
             alt="Itinerary Photo"
             className="w-full h-full object-cover"
+            width={200}
+           height={150}
           />
         </div>
           {/* <ul className="list-none space-y-2">
