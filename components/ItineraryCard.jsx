@@ -1,4 +1,3 @@
-'use client'
 
 import {getGooglePhotoUrl,formatDate} from "@/lib/utils"
 import {
@@ -26,7 +25,7 @@ import {
       }
   
     return (
-      <Card className="shadow-md m-5 w-64 overflow-hidden bg-white" onClick={handleClick}>
+      <Card className="shadow-md m-5 w-64 overflow-hidden bg-white flex justify-end flex-col" onClick={handleClick}>
         <CardHeader>
           <p
             className="font-bold text-lg"

@@ -23,7 +23,7 @@ const SelectedActivityCard = () => {
     name,
     time,
     rating,
-    photoUrl,
+    photoUrl   ,
     description,
     website,
     phone,
@@ -32,6 +32,9 @@ const SelectedActivityCard = () => {
     address
 
   } = selectedActivity;
+
+  const displayPhotoUrl = photoUrl || selectedActivity.photo.images.medium.url;
+
 
   return (
     <Card className="max-w-md w-2/3  mx-auto my-5 bg-white rounded-xl overflow-hidden overflow-y-auto  custom-scroll shadow-md md:max-w-2xl absolute bottom-0 right-0 z-10 p-4">
@@ -44,8 +47,11 @@ const SelectedActivityCard = () => {
             <p className="text-gray-500 flex my-1 items-end">price: {price}</p>
 
             </div>
-            <Image src={photoUrl}  width={200}
+            {displayPhotoUrl &&
+              <Image src={displayPhotoUrl}  width={200}
            height={150} alt={name} className="w-30 h-30 object-cover" />
+            }
+            
         </CardHeader>
         <CardContent>
             <p>{description}</p>

@@ -8,21 +8,30 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { useSelectedActivity } from '@/context/SelectedActivityContext';
 
 const ActivityList = ({places}) => {
+  const { setActivity } = useSelectedActivity();
+
+  const handleActivityClick = (activity) => {
+    console.log(activity)
+    setActivity(activity);
+  }; 
+
   return (
+    <>
     <Carousel
       opts={{
         align: "center",
       }}
       className="w-3/4 ml-16"
     >
-      <CarouselContent className="p-10 h-60">
+      <CarouselContent className="p-8 h-72">
         {places.map((place, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 ">
+          <CarouselItem key={index} className="basis-1/2 " >
             <div className="p-1">
-              <Card className="">
-                <CardContent className="flex aspect-square items-center justify-center p-2 w-full h-fit">
+              <Card className="" onClick={() => handleActivityClick(place)}>
+                <CardContent className="flex aspect-square items-center justify-center p-1 w-full h-fit">
                   {   
                   <PlaceDetails  place={place} />
                 }
@@ -35,6 +44,7 @@ const ActivityList = ({places}) => {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
+    </>
   )
 }
 

@@ -4,11 +4,11 @@ import { Star   } from 'lucide-react';
 
 const PlaceDetails = ({place}) => {
   return (
-    <div className="text-center h-40 w-full relative overflow-hidden">
+    <div className="text-center h-56 w-full relative overflow-hidden">
       <Image
         src={place?.photo?.images.medium.url}
         alt=""
-        className="h-20 w-full object-cover md:w-48"
+        className="h-32 w-full object-cover "
         width={200}
         height={150}
 
@@ -17,7 +17,7 @@ const PlaceDetails = ({place}) => {
       <h2 className="text-m ">{place.name}</h2>
 
       </div>
-          <p className="text-yellow-500 flex my-1 items-end text-sm"><Star/> {place.rating}</p>
+          <p className="text-yellow-500 flex my-1 items-end text-sm absolute bottom-0"><Star/> {place.rating}</p>
     </div>
   );
 };

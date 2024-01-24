@@ -16,7 +16,7 @@ const Days = ({ date, activities }) => {
   const handleActivityClick = (activity) => {
     console.log(activity)
     setActivity(activity);
-  };
+  }; 
   return (
     <>
       <Accordion className='py-5 px-3 my-5' type='single' collapsible>

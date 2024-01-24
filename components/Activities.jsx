@@ -13,14 +13,14 @@ const calculateTotalPrice = (activitiesForDate) => {
 
 
     if (prices.some(isNaN)) {
-      console.error('Invalid price format for activity:', activity);
+      console.error('Invalid price format for activity:');
       return total; 
     }
 
     const averagePrice = prices.reduce((sum, value) => sum + value, 0) / prices.length;
 
     if (isNaN(averagePrice)) {
-      console.error('Average price is NaN for activity:', activity);
+      console.error('Average price is NaN for activity:');
       return total; 
     }
 

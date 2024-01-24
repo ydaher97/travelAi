@@ -20,12 +20,13 @@ const TripNavbar = ({ onMenuSelect }) => {
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger onClick={() => handleMenuSelect('edit')}>
-          Edit
+        more restaurants
+
         </MenubarTrigger>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger onClick={() => handleMenuSelect('view')}>
-          View
+        more attractions
         </MenubarTrigger>
       </MenubarMenu>
     </Menubar>

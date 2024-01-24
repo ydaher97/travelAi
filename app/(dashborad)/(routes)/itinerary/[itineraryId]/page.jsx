@@ -18,6 +18,8 @@ const [coords, setCoords] = useState({});
   const [bounds, setBounds] = useState(null);
 
   const [places,setPlaces] = useState([])
+  const [restaurants,setRestaurants] = useState([])
+
   const [deletedIds, setDeletedIds] = useState([]);
  
 
@@ -59,11 +61,34 @@ useEffect(() => {
 }, [params.itineraryId]);
 
 
+
+
 useEffect(() => {
   const getPlaces = async () => {
     try {
       if (bounds) {
         const response = await axios.get('/api/getPlacesData', {
+          params: {
+            sw: `${bounds.sw.lat},${bounds.sw.lng}`, 
+            ne: `${bounds.ne.lat},${bounds.ne.lng}`, 
+          },
+        });
+        console.log(response.data)
+        setRestaurants(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getPlaces();
+}, [bounds]);
+
+useEffect(() => {
+  const getPlaces = async () => {
+    try {
+      if (bounds) {
+        const response = await axios.get('/api/rapidAttractions', {
           params: {
             sw: `${bounds.sw.lat},${bounds.sw.lng}`, 
             ne: `${bounds.ne.lat},${bounds.ne.lng}`, 
@@ -89,7 +114,7 @@ useEffect(() => {
     <div className="h-screen flex  flex-col md:flex-row">
       <div className="w-full overflow-y-auto  custom-scroll">
         <TravelPlan className="w-full" itinerary={itineraryObj} onDelete={() => handleDelete(itineraryObj.id)}/>
-        <TravelActivites activities={itineraryObj.activities} places={places}/>
+        <TravelActivites activities={itineraryObj.activities} places={places} restaurants={restaurants}/>
         {/* <ActivityList places={places}/> */}
       </div>
       <div className="w-full ">
