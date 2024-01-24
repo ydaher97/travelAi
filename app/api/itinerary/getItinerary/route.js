@@ -5,7 +5,7 @@ import  db  from "@/lib/prismadb";
 
 export async function GET(req) {
   try {
-    const url = new URL(req.url, 'http://localhost:3000');
+    const url = new URL(req.url, process.env.NEXT_PUBLIC_APP_URL);
     const itineraryId = url.searchParams.get('itineraryId');
       const itinerary = await db.Itinerary.findUnique({
         where: {

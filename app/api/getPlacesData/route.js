@@ -5,7 +5,7 @@ import axios from 'axios';
 export async function GET(req,res) {
   try {
 
-    const urll = new URL(req.url, 'http://localhost:3000'); // Replace 'http://localhost:3000' with your actual base URL
+    const urll = new URL(req.url, process.env.NEXT_PUBLIC_APP_URL); // Replace 'http://localhost:3000' with your actual base URL
     const sw = urll.searchParams.get('sw');
     const ne = urll.searchParams.get('ne');
     

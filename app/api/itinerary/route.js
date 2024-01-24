@@ -57,7 +57,7 @@ export async function POST(req) {
               photoPath
           }
       });
-
+      console.log(process.env.NEXT_PUBLIC_APP_URL)
      
       const attractionResponse = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/suggestions`, {
         location, 

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export  async function GET(req, res) {
   try {
-    const url = new URL(req.url, 'http://localhost:3000');
+    const url = new URL(req.url, process.env.NEXT_PUBLIC_APP_URL);
     const place_id = url.searchParams.get('place_id');
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLACES;
 
