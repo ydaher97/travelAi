@@ -59,7 +59,7 @@ export async function POST(req) {
       });
 
      
-      const attractionResponse = await axios.post('https://travel-ai-kappa.vercel.app/api/suggestions', {
+      const attractionResponse = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/suggestions`, {
         location, 
         date,
         budget, 
