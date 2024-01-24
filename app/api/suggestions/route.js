@@ -77,7 +77,7 @@ export async function POST(req, res) {
     // for (let attempt = 1; attempt <= maxRetries; attempt++) {
       // Step 2: Interact with ChatGPT
       const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106",
+        model: "gpt-4",
         messages: conversation,
         max_tokens: 600,
         temperature:1

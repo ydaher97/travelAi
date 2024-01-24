@@ -25,7 +25,7 @@ import {
       }
   
     return (
-      <Card className="shadow-md m-5 w-64 overflow-hidden bg-white flex justify-end flex-col" onClick={handleClick}>
+      <Card className="shadow-md m-5 w-64 overflow-hidden bg-white flex justify-end flex-col transition-transform transform hover:scale-105" style={{ cursor: 'pointer' }} onClick={handleClick}>
         <CardHeader>
           <p
             className="font-bold text-lg"
@@ -40,8 +40,8 @@ import {
             src={getGooglePhotoUrl(photoPath)}
             alt="Itinerary Photo"
             className="w-full h-full object-cover"
-            width={200}
-           height={150}
+            width={400}
+           height={250}
           />
         </div>
         </CardContent>

@@ -27,8 +27,8 @@ const TravelPlan = ({ itinerary, onDelete }) => {
       src={getGooglePhotoUrl(photoPath)}
       alt="Itinerary Photo"
       className="w-full h-[370px] object-cover"
-      width={700}
-           height={150}
+      width={500}
+           height={350}
     />
 
     <div

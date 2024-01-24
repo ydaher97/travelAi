@@ -39,7 +39,7 @@ const SelectedActivityCard = () => {
   return (
     <Card className="max-w-md w-2/3  mx-auto my-5 bg-white rounded-xl overflow-hidden overflow-y-auto  custom-scroll shadow-md md:max-w-2xl absolute bottom-0 right-0 z-10 p-4">
       <Button onClick={() => setActivity(null)}>x</Button>
-        <CardHeader className="flex flex-row justify-between">
+        <CardHeader className="flex lg:flex-row justify-between md:flex-col-reverse">
             <div>
             <h2 className="text-m font-bold">{name}</h2>
             <p className="text-gray-500 flex my-1 items-end">Time: {time}</p>

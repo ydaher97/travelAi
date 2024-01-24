@@ -8,6 +8,13 @@ const calculateTotalPrice = (activitiesForDate) => {
   const activitiesWithPrice = activitiesForDate.filter((activity) => typeof activity.price === 'string');
 
   const totalPrice = activitiesWithPrice.reduce((total, activity) => {
+    
+    // if(activity.price){
+    //   const priceRange = activity.price.replace(/\$/g, ''); // Remove dollar signs
+    // }else{
+    //   const priceRange = activity.price_level.replace(/\$/g, ''); // Remove dollar signs
+
+    // }
     const priceRange = activity.price.replace(/\$/g, ''); // Remove dollar signs
     const prices = priceRange.split('-').map((price) => parseInt(price.trim(), 10));
 

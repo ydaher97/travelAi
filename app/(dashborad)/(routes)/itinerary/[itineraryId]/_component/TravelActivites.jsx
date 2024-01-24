@@ -11,7 +11,7 @@ const TravelActivites = ({activities ,places, restaurants}) => {
     setSelectedMenu(menu);
   };
   return (
-    <div>
+    <div className='mb-8'>
         <TripNavbar onMenuSelect={handleMenuSelect}/>
         {selectedMenu === 'plan' && <Activities activities={activities} />}
       {selectedMenu === 'edit' &&   <ActivityList places={restaurants}/>}
